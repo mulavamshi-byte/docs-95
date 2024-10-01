@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Document Portal</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
+</head>
+<body>
+  <!-- Header with Title -->
+  <header>
+    <h1>Student Document Portal</h1>
+  </header>
+
+  <!-- Search Bar for Roll Number -->
+  <div class="search-container">
+    <input type="text" id="rollNumber" placeholder="Enter your Roll Number" />
+    <button onclick="getDocuments()">Get Documents</button>
+  </div>
+
+  <!-- Display Student Information -->
+  <div id="student-info" style="display: none;">
+    <h2>Your Documents</h2>
+    <div class="student-photo">
+      <img id="student-photo" src="" alt="Student Photo" />
+    </div>
+    <p><strong>Aadhaar:</strong> <a href="#" id="aadhaar-link" target="_blank">View Aadhaar</a> </p>
+    <p><strong>Caste Certificate:</strong> <a href="#" id="caste-certificate-link" target="_blank">View Caste Certificate</a> </p>
+    <p><strong>SSC Memo:</strong> <a href="#" id="ssc-memo-link" target="_blank">View SSC Memo</a> </p>
+    <p><strong>Inter Memo:</strong> <a href="#" id="inter-memo-link" target="_blank">View Inter Memo</a></p>
+    <p><strong>Birth Certificate:</strong> <a href="#" id="birth-certificate-link" target="_blank">View Birth Certificate</a> </p>
+  </div>
+
+  <!-- JavaScript to Handle Roll Number and Generate Links -->
+  <script>
+    // This function generates URLs using the entered roll number
+    function getDocuments() {
+      const rollNumber = document.getElementById("rollNumber").value.trim();
+      
+      // Display the student information section
+      document.getElementById("student-info").style.display = "block";
+
+      // Example: Base URLs with placeholder for roll number
+      const photoBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/${rollNumber}.jpg`;
+      const aadhaarBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/DOCS/${rollNumber}_Aadhar.jpg`;
+      const casteCertificateBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/DOCS/${rollNumber}_Caste.jpg`;
+      const sscMemoBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/DOCS/${rollNumber}_SSC.jpg`;
+      const interMemoBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/DOCS/${rollNumber}_INTER.jpg`;
+      const birthCertificateBaseUrl = `https://iare-data.s3.ap-south-1.amazonaws.com/uploads/STUDENTS/${rollNumber}/DOCS/${rollNumber}_BIRTHCERTIFICATE.jpg`;
+      // Updating the src and href attributes with the new links
+      document.getElementById("student-photo").src = photoBaseUrl;
+      document.getElementById("aadhaar-link").href = aadhaarBaseUrl;
+      document.getElementById("caste-certificate-link").href = casteCertificateBaseUrl;
+      document.getElementById("ssc-memo-link").href = sscMemoBaseUrl;
+      document.getElementById("inter-memo-link").href = interMemoBaseUrl;
+      document.getElementById("birth-certificate-link").href = birthCertificateBaseUrl;
+    }
+  </script>
+
+  <!-- Optional CSS for Styling -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .search-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #rollNumber {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #student-info {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .student-photo img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</body>
+</html>
